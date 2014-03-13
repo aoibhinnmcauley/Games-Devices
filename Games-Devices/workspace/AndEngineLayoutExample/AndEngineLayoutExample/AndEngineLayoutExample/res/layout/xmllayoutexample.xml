@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/xmllayoutexample_outerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <org.andengine.opengl.view.RenderSurfaceView
+        android:id="@+id/xmllayoutexample_rendersurfaceview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/xmllayoutexample_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:hint="@string/xmllayoutexample_text_default"
+            android:maxLength="20"
+            android:singleLine="false"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnLoad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_marginRight="101dp"
+        android:text="Load" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnLoad"
+        android:layout_alignBottom="@+id/btnLoad"
+        android:layout_marginRight="31dp"
+        android:layout_toLeftOf="@+id/btnLoad"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnSave"
+        android:layout_alignBottom="@+id/btnSave"
+        android:layout_alignParentLeft="true"
+        android:text="Clear" />
+
+</RelativeLayout>

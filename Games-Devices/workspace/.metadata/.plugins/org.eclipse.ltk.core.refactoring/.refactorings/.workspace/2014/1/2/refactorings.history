@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;AndEngineWebSocketsDemo&apos;" deleteContents="false" description="Delete resource &apos;AndEngineWebSocketsDemo&apos;" element1="/AndEngineWebSocketsDemo" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1389110904462"/>
+</session>

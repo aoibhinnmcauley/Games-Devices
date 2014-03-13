@@ -1,0 +1,188 @@
+package ie.itcarlow;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import org.andengine.engine.camera.Camera;
+import org.andengine.engine.options.EngineOptions;
+import org.andengine.engine.options.ScreenOrientation;
+import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+import org.andengine.entity.scene.Scene;
+import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.text.Text;
+import org.andengine.opengl.font.Font;
+import org.andengine.opengl.font.FontFactory;
+import org.andengine.opengl.texture.TextureOptions;
+import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.ui.activity.LayoutGameActivity;
+import android.content.Context;
+import android.graphics.Typeface;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
+public class AndEngineLayoutActivity extends LayoutGameActivity implements TextWatcher {//textwatch is an interface, figures out when changed
+
+	// ===========================================================
+	// Constants
+	// ===========================================================
+	private static final int CAMERA_WIDTH = 480;
+	private static final int CAMERA_HEIGHT = 800;
+    
+	
+	// ===========================================================
+	// Fields
+	// ===========================================================
+	
+	private Scene mScene;
+	
+    // Text related fields.
+    private Text mText;
+    private Font mFont;
+   
+    // A standard edit text control. 
+    private EditText mEditText;
+    
+    // A standard button
+    private Button mButton;
+    private Button mBtnSave;
+    private Button mBtnLoad;
+    
+    private SharedPreferencesManager SPManager;
+    
+    private int countSaves;
+ 
+	// ===========================================================
+	// Constructors
+	// ===========================================================
+	// ===========================================================
+	// Getter & Setter
+	// ===========================================================
+	// ===========================================================
+	// Methods for/from SuperClass/Interfaces
+	// ===========================================================
+	
+	@Override
+	protected int getLayoutID() {//returns a refernce to the XML layout decripitor.
+		return R.layout.xmllayoutexample;
+	}
+
+	@Override
+	protected int getRenderSurfaceViewID() {
+		return R.id.xmllayoutexample_rendersurfaceview;
+	}
+
+	@Override
+	protected void onSetContentView() {
+		super.onSetContentView();
+
+		this.mEditText = (EditText)this.findViewById(R.id.xmllayoutexample_text);
+		this.mEditText.addTextChangedListener(this);
+		
+		mButton = (Button)this.findViewById(R.id.button);
+		mButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mEditText.setText("");	
+			}
+		});
+		
+		mBtnSave = (Button)this.findViewById(R.id.btnSave);
+		mBtnSave.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+		    	countSaves = SPManager.getHighScore(mEditText.getText().toString());
+		    	countSaves++;
+				SPManager.saveHighScore(mEditText.getText().toString(), countSaves);
+			}
+		});
+		
+		mBtnLoad = (Button)this.findViewById(R.id.btnLoad);
+		mBtnLoad.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int y = SPManager.getHighScore(mEditText.getText().toString());
+				Toast toast = Toast.makeText(getApplicationContext(), "Saved:  " + y + " to player: "+ (mEditText.getText().toString()), Toast.LENGTH_SHORT);	
+				toast.show();
+			}
+		});
+		
+	}
+	
+	@Override
+	public EngineOptions onCreateEngineOptions() {
+		final Camera camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+		return new EngineOptions(true, ScreenOrientation.PORTRAIT_FIXED, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
+	}
+	
+	
+	@Override
+	public void onCreateResources(
+			OnCreateResourcesCallback pOnCreateResourcesCallback)
+			throws Exception {
+	
+		this.mFont = FontFactory.create(this.getFontManager(), this.getTextureManager(), 256, 256, TextureOptions.BILINEAR, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 24);
+		this.mFont.load();
+		SPManager =SharedPreferencesManager.getInstance(AndEngineLayoutActivity.this);			
+		pOnCreateResourcesCallback.onCreateResourcesFinished();
+	}
+	
+	@Override
+	public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback)
+			throws Exception {
+		this.mScene = new Scene();
+		this.mScene.setBackground(new Background(0, 125, 58));
+		pOnCreateSceneCallback.onCreateSceneFinished(this.mScene);
+		
+	}
+	
+
+	@Override
+	public void onPopulateScene(Scene pScene,
+			OnPopulateSceneCallback pOnPopulateSceneCallback) throws Exception {
+	    
+		final VertexBufferObjectManager vertexBufferObjectManager = this.getVertexBufferObjectManager();
+		this.mText = new Text(50, 240, this.mFont, "", 1000, vertexBufferObjectManager);
+		mScene.attachChild(this.mText);    
+	    pOnPopulateSceneCallback.onPopulateSceneFinished();
+	}
+	
+	
+	// TextWatcher methods
+	@Override	
+	public void afterTextChanged(final Editable pEditable) {
+		updateText();
+	}
+
+	private void updateText() {
+		final String string = this.mEditText.getText().toString();
+		if ( this.mText != null ) {
+			this.mText.setText(string);
+		}
+	}
+
+	@Override
+	public void beforeTextChanged(final CharSequence pCharSequence, final int pStart, final int pCount, final int pAfter) {
+		/* Nothing. */
+	}
+
+	@Override
+	public void onTextChanged(final CharSequence pCharSequence, final int pStart, final int pBefore, final int pCount) {
+		/* Nothing. */
+	}
+
+	
+}

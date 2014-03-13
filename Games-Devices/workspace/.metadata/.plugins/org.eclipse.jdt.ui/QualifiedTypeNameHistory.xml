@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="ie.itcarlow.androidevents.R.id"/>
+<fullyQualifiedTypeName name="android.media.MediaPlayer"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.os.Debug"/>
+<fullyQualifiedTypeName name="org.andengine.util.debug.Debug"/>
+<fullyQualifiedTypeName name="org.andengine.util.color.Color"/>
+<fullyQualifiedTypeName name="org.andengine.entity.text.Text"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="org.andengine.engine.camera.Camera"/>
+<fullyQualifiedTypeName name="org.json.JSONArray"/>
+<fullyQualifiedTypeName name="ie.itcarlow.R.id"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="org.andengine.ui.activity.LayoutGameActivity"/>
+<fullyQualifiedTypeName name="ie.projectiii.R.layout"/>
+<fullyQualifiedTypeName name="android.R"/>
+<fullyQualifiedTypeName name="android.graphics.Camera"/>
+</qualifiedTypeNameHistroy>
