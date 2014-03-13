@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8"></meta>
+        <title>
+
+            Canvas Primer - Example: drawImage
+
+        </title>
+        <script type="text/javascript">
+
+            <!--
+    window.addEventListener('load', function () {
+        // Get the canvas element.
+        var elem = document.getElementById('myCanvas');
+        if (!elem || !elem.getContext) {
+            return;
+        }
+
+        // Get the canvas 2d context.
+        var context = elem.getContext('2d');
+        if (!context || !context.drawImage) {
+            return;
+        }
+
+        // Create a new image.
+        var img = new Image();
+
+        // Once it's loaded draw the image on the canvas.
+        img.addEventListener('load', function () {
+            // Original resolution: x, y.
+
+            context.drawImage(this, 0, 0);
+
+            // Now resize the image: x, y, w, h.
+            // context.drawImage(this, 300, 0, 120, 70);
+
+            // Crop and resize the image: sx, sy, sw, sh, dx, dy, dw, dh.
+            context.drawImage(this, 200, 20, 340, 50, 0, 250, 350, 70);
+        }, false);
+
+        context.fillStyle = '#60f';
+        context.strokeStyle = '#f60';
+        context.lineWidth = 2;
+
+        // Draw a right triangle.
+        context.beginPath();
+        context.moveTo(620, 320);
+        context.lineTo(620, 320);
+        context.lineTo(320, 620);
+        context.lineTo(320, 320);
+        context.fill();
+        context.stroke();
+        context.closePath();
+
+        // Draw a circle using the arc function.
+        context.beginPath();
+
+        // Arguments: x, y, radius, start angle, end angle, anticlockwise
+        context.arc(400, 120, 100, 0, 360, false);
+        context.stroke();
+        context.closePath();
+
+        context.fillStyle = '#80f';
+        context.font = 'italic 30px sans-serif';
+        context.textBaseline = 'top';
+        context.fillText('My Name is Aoibhinn!', 20, 300);
+        context.font = 'bold 30px sans-serif';
+        context.strokeText('This is lab exercise three!', 20, 350);
+
+        // Let's draw a blue rectangle with a red shadow.
+        // Shadows only render in Firefox 3.1 nightly builds and in Konqueror 4.1.
+        context.shadowOffsetX = 8;
+        context.shadowOffsetY = 8;
+        context.shadowBlur = 8;
+        context.shadowColor = 'rgba(255, 3, 10, 0.5)';
+
+        var gradient = context.createLinearGradient(0, 50, 170, 0);
+        gradient.addColorStop(0, "black");
+        gradient.addColorStop(1, "white");
+
+        context.fillStyle = gradient;
+        context.fillRect(20, 520, 250, 100);
+
+        img.src = 'http://icons.iconarchive.com/icons/raindropmemory/harmonia-pastelis/256/hp-dog-icon.png';
+    }, false);
+    // -->
+
+        </script>
+    </head>
+    <body>
+        <p>
+            <canvas id="myCanvas" height="850" width="850">
+
+                Your browser does not have 
+                    support for Canvas. You should see something like the following image: 
+
+                <img alt="Example rendering of drawImage." src="images/example-drawimage.jpg"></img>
+            </canvas>
+        </p>
+    </body>
+
+</html>
